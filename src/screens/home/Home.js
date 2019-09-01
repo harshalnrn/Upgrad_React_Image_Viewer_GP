@@ -27,8 +27,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
-import { red } from '@material-ui/core/colors';
-import { Icon } from '@material-ui/core';
+import ReactCrop from 'react-image-crop';
+
 
 
 
@@ -55,8 +55,8 @@ const styles = theme => ({
      avatar: {
         margin: 25,      
       },  
-      profileAvatar: {
-         
+      profileIconButton: {
+        margin:theme.spacing(1),
           float:'right',
          
          
@@ -159,9 +159,12 @@ this.setState({
                             </span>     
 
                   
-
-<span><Avatar  src={profilePic} style={{float:'right',marginTop:'11px',marginRight:'-420px'}}></Avatar></span>
-
+<span style={{float:'right',marginRight:'-420px'}}>
+<IconButton > 
+<img src={profilePic} style={{height:'50px',width:'50px'}} alt='profile image not available'/> 
+{/* dont know how to make the icon button circular */}
+</IconButton>
+</span>
 
 
                             </div>  
