@@ -23,6 +23,12 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Favorite from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+import SearchIcon from '@material-ui/icons/Search';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import { red } from '@material-ui/core/colors';
+import { Icon } from '@material-ui/core';
 
 
 
@@ -49,6 +55,12 @@ const styles = theme => ({
      avatar: {
         margin: 25,      
       },  
+      profileAvatar: {
+         
+          float:'right',
+         
+         
+      }
 });
 
 
@@ -64,6 +76,7 @@ constructor(){
     this.state={
         isEdit:false,   //for conditional rendering of like icons
         likeCount:0,
+        onChangeComments:"",
         comments:""
     }
 }
@@ -88,15 +101,20 @@ likeCount:this.state.likeCount +1
 
 }
 
+onChangeComments=(e)=>{
 
+this.setState({
+    onChangeComments:e.target.value   
+})
+ 
+}
 
 
 commentsHandler=(e)=>{
-    console.log(e.target.value)
+console.log(e.target.value);
 this.setState({
-    comments:e.target.value
+    comments:this.state.onChangeComments
 })
-
 
 }
 
@@ -104,7 +122,7 @@ this.setState({
 
 
 
-
+//----------------------------------------------------------------------------------------
 
 
     render(){
@@ -117,10 +135,46 @@ this.setState({
         return(
 
             <div>
-            <header className="app-header">
+              
+              
+              
+                       
+             <header className="app-header">
+                <div>
                             <span className="header-logo">Image Viewer</span>
+                           
+                            <span className="header-search-box">
+                               <TextField  placeholder="Search..." margin="normal" style={{backgroundColor:'#c0c0c0',float:'right',marginRight:'160px',marginBottom:'15px',width:'300px',borderRadius:'4px'}}
+                                InputProps={{
+                                    disableUnderline: true,
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <SearchIcon  color="black"/>
+                                      </InputAdornment>
+                                     )
+                                    }}
+                                />
+                                  
+                                 
+                            </span>     
+
+                  
+
+<span><Avatar  src={profilePic} style={{float:'right',marginTop:'11px',marginRight:'-420px'}}></Avatar></span>
+
+
+
+                            </div>  
+
+                        
+
                         </header> 
                         
+
+
+
+
+
 
 <div className="flex-container">
                
@@ -130,9 +184,12 @@ this.setState({
     
 imageData.map(image =>(
 
-    <GridListTile className= "parentGridContainer" key={image.id}>
+    
 
-<Grid key={image.id} >   
+
+    <GridListTile  key={image.id} value={image}className= "parentGridContainer">
+
+<Grid  value={image} >      {/* why is the unique key not recognizigin each grid uniquely!! */}
 
 
     {/* inner content of each grid/card starts from below     */}
@@ -143,13 +200,13 @@ imageData.map(image =>(
 <Grid item><Avatar alt="Remy Sharp" src={profilePic} className={classes.avatar}></Avatar></Grid>
 
 
- <Grid item xs={2} sm container> 
+ <Grid  item xs={2} sm container> 
 <Grid container direction="column">
 
-<Grid item xs>
+<Grid  item xs>
 <Typography variant="caption" component="caption"  style={{padding:0,textAlign:'left',fontWeight:'bold'}}>harshal_nrn</Typography>
 </Grid>
-<Grid item xs>
+<Grid  item xs>
 <Typography variant="caption" component="caption"   style={{padding:0,textAlign:'left',display:'inline'}}>03/10/2019 16:08:08</Typography>
 </Grid>
 
@@ -174,24 +231,24 @@ imageData.map(image =>(
 
 
 
-<Grid container direction="column" alignItems="left" >
+<Grid  container direction="column" alignItems="left" >
 
-<Grid item xs ><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',paddingLeft:'18px',fontSize:'10px'}}>My Profile Pic</Typography></Grid>
-<Grid item xs ><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',paddingLeft:'18px',color:'blue',fontSize:'10px'}}>#TimePass</Typography></Grid>
-<Grid item xs >
-<Grid container direction="row" alignItems="center" >
-<Grid item>
+<Grid  item xs ><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',paddingLeft:'18px',fontSize:'10px'}}>My Profile Pic</Typography></Grid>
+<Grid  item xs ><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',paddingLeft:'18px',color:'blue',fontSize:'10px'}}>#TimePass</Typography></Grid>
+<Grid  item xs >
+<Grid  container direction="row" alignItems="center" >
+<Grid  item>
 
     {/* eighter implement conditional rendering or control display of elements dynamically */}
 {!(this.state.isEdit) ?
-<FavoriteBorderIcon className={this.state.favoriteBorderIconDisplay}  style={{padding:13}}  onClick={this.likeIconClickHandler}/> 
+<FavoriteBorderIcon  className={this.state.favoriteBorderIconDisplay}  style={{padding:13}}  onClick={this.likeIconClickHandler}/> 
 :
-<Favorite className={this.state.favoriteIconDisplay}  style={{padding:13,color:'red'}} onClick={this.likeIconClickHandler}/>
+<Favorite  className={this.state.favoriteIconDisplay}  style={{padding:13,color:'red'}} onClick={this.likeIconClickHandler}/>
 }
 </Grid>
 
-<Grid item>
-    <Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',fontSize:'15px'}}>
+<Grid item >
+    <Typography   variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',fontSize:'15px'}}>
     { (this.state.likeCount)>0 ? <span>{this.state.likeCount}</span> :<span></span>  }
     </Typography></Grid>
 </Grid>
@@ -203,11 +260,12 @@ imageData.map(image =>(
 
 
 
-<Grid container direction="row" alignItems="center">
-<Grid item style={{paddingLeft:'16px',fontWeight:'bold'}}>harshal_nrn: </Grid>
-
-<Grid item>&ensp;{this.state.comments}</Grid>
+<Grid container  direction="row" alignItems="center">
+    {/* can below 2 items be dynmically added each time on ADD event ? */}
+<Grid item  style={{paddingLeft:'16px',fontWeight:'bold'}}>harshal_nrn: </Grid>
+<Grid id={image.id} item> {this.state.comments}     </Grid>
 </Grid>
+
 <br/><br/>
 
 
@@ -223,8 +281,8 @@ imageData.map(image =>(
 
 
  <Grid container direction="row" alignItems="left" >
-<Input  variant="contained" placeholder="Add a Comment" style={{marginLeft:'15px',marginRight:'10px',width:300,marginLeft:'10px',fontSize:'13px'}} onClick={this.commentsHandler}></Input>
-<Button variant="contained" color="primary" size="large" style={{fontSize:'10px'}} >Add</Button>
+<Input   variant="contained" placeholder="Add a Comment" style={{marginLeft:'15px',marginRight:'10px',width:300,marginLeft:'10px',fontSize:'13px'}} onChange={this.onChangeComments} ></Input>
+<Button  variant="contained" color="primary" size="large" style={{fontSize:'10px'}} onClick={this.commentsHandler} value={image.id}>Add</Button>
 </Grid>
 
 

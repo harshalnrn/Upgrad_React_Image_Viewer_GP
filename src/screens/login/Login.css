@@ -10,7 +10,13 @@
     color: #fff;
     font-size: 18px;
     align-self: flex-start;
-    margin-left: 20px;
+    margin-left: 10px;
+    display: inline-block;
+    margin-top: 15px;
+   
+  
+}
+.header-search-box{ 
 }
 
 .card-container{
