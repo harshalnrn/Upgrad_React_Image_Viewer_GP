@@ -16,6 +16,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Select from'@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
 import Checkbox  from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
@@ -27,7 +28,11 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
-import ReactCrop from 'react-image-crop';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+
 
 
 
@@ -77,7 +82,8 @@ constructor(){
         isEdit:false,   //for conditional rendering of like icons
         likeCount:0,
         onChangeComments:"",
-        comments:""
+        comments:"",
+        menuListFlag:false,
     }
 }
 //---------------------------------------------------------------------------------------------------
@@ -118,7 +124,12 @@ this.setState({
 
 }
 
+menuListVisibilityHandler=(e)=>{
 
+    this.setState({
+        menuListFlag:true
+    })
+}
 
 
 
@@ -160,20 +171,33 @@ this.setState({
 
                   
 <span style={{float:'right',marginRight:'-420px'}}>
-<IconButton > 
-<img src={profilePic} style={{height:'50px',width:'50px'}} alt='profile image not available'/> 
-{/* dont know how to make the icon button circular */}
+<IconButton onClick={this.menuListVisibilityHandler}> 
+<img src={profilePic}  style={{height:'50px',width:'50px',borderRadius:'25px'}} alt='profile image not available'/> 
+
 </IconButton>
 </span>
 
-
                             </div>  
 
-                        
-
                         </header> 
-                        
 
+
+{(this.state.menuListFlag) ?
+<div className='menuList'>
+<Paper id="menu-list-grow">
+                <ClickAwayListener /* onClickAway={handleClose} */>
+                  <MenuList style={{borderRadius:'15px'}}>
+                    <MenuItem /* onClick={handleClose} */>Profile</MenuItem>
+                    <MenuItem /* onClick={handleClose} */>My account</MenuItem>
+                    <MenuItem /* onClick={handleClose} */>Logout</MenuItem>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+</div>
+:
+<span></span>
+
+}
 
 
 

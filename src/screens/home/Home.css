@@ -37,6 +37,20 @@
     padding:13px;
 }
 
+
+
+ .menuList{
+
+    display:flex;
+    flex-direction: column;
+    width:120px;
+    float: right;
+    margin-right: 3px;
+
+ }
+
+
+
 .dispBlock{
     display: block;
     padding:13px;
