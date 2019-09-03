@@ -22,12 +22,12 @@
   the above CSS styling provides a horizontal scroll bar */
 
   .image-poster {
-    height:400px;    
+    height:450px;    
     overflow:hidden;
     position:relative;
-    width: 90%;
-    padding: 10px;
-    margin-left:10px;
+    width: 99%;
+   
+    
 
     
 } 
@@ -57,9 +57,12 @@
 }
 
 .parentGridContainer{
-    border-width:5px;  
+    border-width:1px;  
     margin: 15px;
     border-style:groove;
+    display: block;
+    
+    height:500px;
 
 }
 .flex-container {
