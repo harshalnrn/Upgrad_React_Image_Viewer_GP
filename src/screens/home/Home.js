@@ -86,7 +86,10 @@ constructor(){
         onChangeComments:"",
         comments:"",
         menuListFlag:false,
-        responseData:[]
+        responseData:[],
+        profilePicture:"",
+        
+
     }
 }
 //---------------------------------------------------------------------------------------------------
@@ -100,14 +103,22 @@ xhr.addEventListener("readystatechange",function(){
 if(this.readyState ===4){
     console.log(JSON.parse(this.responseText)); //convert this string to json object
     that.setState({
-        responseData:JSON.parse(this.responseText).data
+        responseData:JSON.parse(this.responseText).data,
+       profilePicture:JSON.parse(this.responseText).data[0].user.profile_picture
+
     })
 }
 })
 xhr.open("GET",this.props.baseUrl+"users/self/media/recent?access_token=18968665551.0214b37.f2788433f83a46cda0dc99d50173a761");
 xhr.setRequestHeader("Cache-Control","no-cache");
 xhr.send(data);
+
 }
+
+
+
+
+
 //event handler functions shall be below
 
 likeIconClickHandler=(e)=>{
@@ -175,6 +186,7 @@ menuListVisibilityHandler=(e)=>{
                 <div>
                             <span className="header-logo">Image Viewer</span>
                            
+
                             <span className="header-search-box">
                                <TextField  placeholder="Search..." margin="normal" style={{backgroundColor:'#c0c0c0',float:'right',marginRight:'160px',marginBottom:'15px',width:'300px',borderRadius:'4px'}}
                                 InputProps={{
@@ -193,7 +205,7 @@ menuListVisibilityHandler=(e)=>{
                   
 <span style={{float:'right',marginRight:'-420px'}}>
 <IconButton onClick={this.menuListVisibilityHandler}> 
-<img src={profilePic}  style={{height:'50px',width:'50px',borderRadius:'25px'}} alt='profile image not available'/> 
+<img src={this.state.profilePicture}  style={{height:'50px',width:'50px',borderRadius:'25px'}} alt='profile image not available'/> 
 
 </IconButton>
 </span>
@@ -245,17 +257,17 @@ this.state.responseData.map(image =>(
 
     /* inner content of each grid/card starts from below     */
 
-    <Card key="M1"  className= "parentGridContainer">
+    <Card key={this.state.responseData.id}  className= "parentGridContainer">
  
-<CardHeader avatar={
-  <Avatar alt="Remy Sharp" src={profilePic} className={classes.avatar}/> 
+<CardHeader key={this.state.responseData.id} avatar={
+  <Avatar alt="Remy Sharp" src={this.state.profilePicture} className={classes.avatar}/> 
 }
-title="harshal_nrn"
+title={image.user.username}
 subheader="03/10/2019 16:08:08"
 />
 {/* <Grid container direction="row" alignItems="center">                     {/* remember why key is needed for each element within map */}
 
-<CardContent>
+<CardContent key={this.state.responseData.id}>
 
 
 
@@ -263,7 +275,7 @@ subheader="03/10/2019 16:08:08"
 
 
     
-<img className="image-poster" src={image.images.standard_resolution.url} alt={image.title}/>
+<img key={this.state.responseData.id} className="image-poster" src={image.images.standard_resolution.url} alt={image.title}/>
 
 <Divider/>
 
@@ -274,9 +286,9 @@ subheader="03/10/2019 16:08:08"
 
 
 
-<Grid  container direction="column" alignItems="left" >
+<Grid  key={this.state.responseData.id} container direction="column" alignItems="left" >
 
-<Grid  item xs ><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',fontSize:'10px'}}>My Profile Pic</Typography></Grid>
+<Grid  item xs ><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',fontSize:'10px'}}>{image.caption.text}</Typography></Grid>
 <Grid  item xs ><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',color:'blue',fontSize:'10px'}}>#TimePass</Typography></Grid>
 <Grid  item xs >
 <Grid  container direction="row" alignItems="center" >
@@ -290,7 +302,7 @@ subheader="03/10/2019 16:08:08"
 }
 </Grid>
 
-<Grid item >
+<Grid key={this.state.responseData.id} item >
     <Typography   variant="caption" component="caption"  style={{textAlign:'center',align:'center',display:'inline',fontSize:'15px'}}>
     { (this.state.likeCount)>0 ? <span>{this.state.likeCount}</span> :<span></span>  }
     </Typography></Grid>
@@ -303,7 +315,7 @@ subheader="03/10/2019 16:08:08"
 
 
 
-<Grid container  direction="row" alignItems="center">
+<Grid key={this.state.responseData.id} container  direction="row" alignItems="center">
     {/* can below 2 items be dynmically added each time on ADD event ? */}
 <Grid item  style={{fontWeight:'bold'}}>harshal_nrn: </Grid>
 <Grid id={image.id} item> {this.state.comments}     </Grid>
@@ -323,7 +335,7 @@ subheader="03/10/2019 16:08:08"
 
 
 
- <Grid container direction="row" alignItems="left" >
+ <Grid key={this.state.responseData.id} container direction="row" alignItems="left" >
 <Input   variant="contained" placeholder="Add a Comment" style={{width:300,fontSize:'13px'}} onChange={this.onChangeComments} ></Input>
 <Button  variant="contained" color="primary" size="large" style={{fontSize:'10px'}} onClick={this.commentsHandler} value={image.id}>Add</Button>
 </Grid>
