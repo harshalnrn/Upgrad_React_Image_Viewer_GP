@@ -33,6 +33,7 @@ import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import { CardHeader } from '@material-ui/core';
+import Moment from 'react-moment';
 
 
 
@@ -88,6 +89,7 @@ constructor(){
         menuListFlag:false,
         responseData:[],
         profilePicture:"",
+        tags:"",
         
 
     }
@@ -247,7 +249,7 @@ menuListVisibilityHandler=(e)=>{
     
 this.state.responseData.map(image =>(
 
- 
+    
 
 
     
@@ -262,9 +264,12 @@ this.state.responseData.map(image =>(
 <CardHeader key={this.state.responseData.id} avatar={
   <Avatar alt="Remy Sharp" src={this.state.profilePicture} className={classes.avatar}/> 
 }
+
 title={image.user.username}
-subheader="03/10/2019 16:08:08"
+
+subheader={image.created_time}
 />
+
 {/* <Grid container direction="row" alignItems="center">                     {/* remember why key is needed for each element within map */}
 
 <CardContent key={this.state.responseData.id}>
@@ -289,8 +294,18 @@ subheader="03/10/2019 16:08:08"
 <Grid  key={this.state.responseData.id} container direction="column" alignItems="left" >
 
 <Grid  item xs ><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',fontSize:'10px'}}>{image.caption.text}</Typography></Grid>
-<Grid  item xs ><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',color:'blue',fontSize:'10px'}}>#TimePass</Typography></Grid>
 <Grid  item xs >
+{
+image.tags.map(tag =>(
+
+        <Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',color:'blue',fontSize:'10px'}}> #{tag}</Typography>
+ ))}
+        </Grid>
+
+   
+    
+<Grid  item xs >
+
 <Grid  container direction="row" alignItems="center" >
 <Grid  item>
 
@@ -304,7 +319,7 @@ subheader="03/10/2019 16:08:08"
 
 <Grid key={this.state.responseData.id} item >
     <Typography   variant="caption" component="caption"  style={{textAlign:'center',align:'center',display:'inline',fontSize:'15px'}}>
-    { (this.state.likeCount)>0 ? <span>{this.state.likeCount}</span> :<span></span>  }
+    { (image.likes.count)>0 ? <span>{image.likes.count}</span> :<span></span>  }
     </Typography></Grid>
 </Grid>
 
