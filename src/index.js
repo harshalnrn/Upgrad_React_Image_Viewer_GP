@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Home from './screens/home/Home.js';
+import Controller from './screens/controller/Controller.js';
 
 ReactDOM.render(
 
-    <Home/>, 
+    <Controller/>, 
     document.getElementById('root')
 );

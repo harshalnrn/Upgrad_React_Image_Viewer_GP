@@ -86,9 +86,28 @@ constructor(){
         onChangeComments:"",
         comments:"",
         menuListFlag:false,
+        responseData:[]
     }
 }
 //---------------------------------------------------------------------------------------------------
+
+componentWillMount(){
+let data=null; //request body remains null since its get
+let xhr=new XMLHttpRequest();
+let that=this;
+xhr.addEventListener("readystatechange",function(){
+
+if(this.readyState ===4){
+    console.log(JSON.parse(this.responseText)); //convert this string to json object
+    that.setState({
+        responseData:JSON.parse(this.responseText).data
+    })
+}
+})
+xhr.open("GET",this.props.baseUrl+"users/self/media/recent?access_token=18968665551.0214b37.f2788433f83a46cda0dc99d50173a761");
+xhr.setRequestHeader("Cache-Control","no-cache");
+xhr.send(data);
+}
 //event handler functions shall be below
 
 likeIconClickHandler=(e)=>{
@@ -210,10 +229,13 @@ menuListVisibilityHandler=(e)=>{
     <GridList cellHeight={750}  className={classes.gridListImages} cols ={3} >
        
 {
-    
-imageData.map(image =>(
+
+
 
     
+this.state.responseData.map(image =>(
+
+ 
 
 
     
@@ -223,8 +245,8 @@ imageData.map(image =>(
 
     /* inner content of each grid/card starts from below     */
 
-    <Card key={image.id} value={image} className= "parentGridContainer">
-
+    <Card key="M1"  className= "parentGridContainer">
+ 
 <CardHeader avatar={
   <Avatar alt="Remy Sharp" src={profilePic} className={classes.avatar}/> 
 }
@@ -241,7 +263,8 @@ subheader="03/10/2019 16:08:08"
 
 
     
-<img className="image-poster" src={image.image_url} alt={image.title}/>
+<img className="image-poster" src={image.images.standard_resolution.url} alt={image.title}/>
+
 <Divider/>
 
 
