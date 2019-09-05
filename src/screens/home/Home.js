@@ -34,6 +34,7 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import { CardHeader } from '@material-ui/core';
 import Moment from 'react-moment';
+// import SearchedImage from '../home/SearchedImage.js';
 
 
 
@@ -85,6 +86,7 @@ constructor(){
     this.state={
         isEdit:false,   //for conditional rendering of like icons
         likeCount:0,
+        isSearched:false,
         onChangeComments:"",
         comments:"",
         menuListFlag:false,
@@ -92,6 +94,7 @@ constructor(){
         profilePicture:"",
         userName:"",
         tags:"",
+        id:"",
         
 
     }
@@ -159,22 +162,28 @@ xhr1.send(data);
 
 //event handler functions shall be below
 
-likeIconClickHandler=(e)=>{
+likeIconClickHandler= (id) => {
     //dynamically toggle between classNames, as per condition
+   console.log(id); 
+
  if(!this.state.isEdit){
+
     this.setState({
+        id:id,
 isEdit:true, 
 likeCount:this.state.likeCount +1 
     })
+    
 }
-    else{
+    else if(this.state.isEdit){
         this.setState({
+            id:id,
             isEdit:false,  
             likeCount:this.state.likeCount  -1   
     })
+    
 
 } 
-
 }
 
 
@@ -183,22 +192,32 @@ likeCount:this.state.likeCount +1
 
 searchEventHandler=(e)=>{
 
+this.state.responseData.map(image =>{
 
+if((image.caption.text).contains(e.target.value))
+
+this.setState({
+    isSearched:true
+})
+
+})
 
 }
 
 onChangeComments=(e)=>{
 
 this.setState({
+
     onChangeComments:e.target.value   
 })
  
 }
 
 
-commentsHandler=(e)=>{
-console.log(e.target.value);
+commentsHandler=(id)=>{
+
 this.setState({
+    id:id,
     comments:this.state.onChangeComments
 })
 
@@ -299,19 +318,18 @@ menuListVisibilityHandler=(e)=>{
 { 
 this.state.responseData.map(image =>(
 
-   
-   
-   
+    //  (this.state.isSearched) ?
+  /*    <div>
+<SearchedImage  image={image}  />   //add props to child component, to pass parameters
+</div> */
+  //  :
 
-    
-
-/* <Grid  value={image} > */    /* why is the unique key not recognizigin each grid uniquely!! */
 
 
     /* inner content of each grid/card starts from below     */
-    <Card key={this.state.responseData.id} className="parentGridContainer">
+    <Card key={image.id} className="parentGridContainer">
  
-<CardHeader key={this.state.responseData.id} avatar={
+<CardHeader avatar={
   <Avatar alt="Remy Sharp" src={this.state.profilePicture} className={classes.avatar}/> 
 }
 
@@ -322,7 +340,7 @@ subheader={image.created_time}
 
 {/* <Grid container direction="row" alignItems="center">                     {/* remember why key is needed for each element within map */}
 
-<CardContent key={this.state.responseData.id}>
+<CardContent>
 
 
 
@@ -341,44 +359,56 @@ subheader={image.created_time}
 
 
 
-<Grid  key={this.state.responseData.id} container direction="column" alignItems="left" >
+<Grid   container direction="column" alignItems="left" >
 
-<Grid  item xs key={this.state.responseData.id}><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',fontSize:'10px'}}>{image.caption.text}</Typography></Grid>
-<Grid  item xs key={this.state.responseData.id} >
+<Grid  item xs ><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',fontSize:'10px'}}>{image.caption.text}</Typography></Grid>
+<Grid  item xs  >
 {
 
    /*  confusion on what comes within {}, and what not */
 image.tags.map(tag =>(
 
-        <Typography key={this.state.responseData.id} variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',color:'blue',fontSize:'10px'}}> #{tag}</Typography>
+        <Typography key = {image.id} variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',color:'blue',fontSize:'10px'}}> #{tag}</Typography>
  ))}
         </Grid>
 
    
     
-<Grid key={this.state.responseData.id} item xs >
+<Grid  item xs >
 
-<Grid key={this.state.responseData.id} container direction="row" alignItems="center" >
-<Grid key={this.state.responseData.id} item>
+<Grid  container direction="row" alignItems="center" >
+<Grid item>
 
     {/* eighter implement conditional rendering or control display of elements dynamically */}
 {
    
     
-    !(this.state.isEdit) ?
-    
-<FavoriteBorderIcon   key={this.state.responseData.id} className={this.state.favoriteBorderIconDisplay} style={{marginLeft:'-3px'}}   onClick={this.likeIconClickHandler}/> 
-:
-<Favorite  key={this.state.responseData.id} className={this.state.favoriteIconDisplay}  style={{marginLeft: '-3px',color:'red'}}  onClick={this.likeIconClickHandler}/>
+    (this.state.isEdit && (image.id===this.state.id) ) ?
+    <Favorite  key={image.id} className={this.state.favoriteIconDisplay}  style={{marginLeft: '-3px',color:'red'}}  onClick={() => this.likeIconClickHandler(image.id)}/>
+    :
+<FavoriteBorderIcon   key={image.id} className={this.state.favoriteBorderIconDisplay} style={{marginLeft:'-3px'}}   onClick={() =>this.likeIconClickHandler(image.id)}/> 
+
+
 }
 &nbsp;
 </Grid>
 
-<Grid key={this.state.responseData.id} item > 
+<Grid  item > 
 
 
-    <Typography  key={this.state.responseData.id}  variant="caption" component="caption"  style={{textAlign:'center',align:'center',display:'inline',fontSize:'15px'}}>
-    { (image.likes.count)>0 ? <span> {image.likes.count + this.state.likeCount } likes</span> :<span></span>  }
+    <Typography    variant="caption" component="caption"  style={{textAlign:'center',align:'center',display:'inline',fontSize:'15px'}}>
+    {/* below note the separate conditional cases , where one is when retreived, and other on event */}
+    { ((image.id===this.state.id))? <span> {image.likes.count + this.state.likeCount } likes</span> :<span/>
+    }
+
+
+    {(image.likes.count>0 && image.id!=this.state.id  ) ?
+    <span> {image.likes.count} likes</span> :
+    <span/>
+    }
+    
+
+
     </Typography>
 
 </Grid>
@@ -391,10 +421,25 @@ image.tags.map(tag =>(
 
 
 
-<Grid key={this.state.responseData.id} container  direction="row" alignItems="center">
+<Grid  container  direction="row" alignItems="center">
     {/* can below 2 items be dynmically added each time on ADD event ? */}
-<Grid key={this.state.responseData.id} item  style={{fontWeight:'bold'}}>harshal_nrn: </Grid>
-<Grid key={this.state.responseData.id} item> {this.state.comments}     </Grid>
+
+<Grid  item  style={{fontWeight:'bold'}}>{
+    (this.state.comments!="" && image.id===this.state.id ) ?
+    this.state.userName + ':'
+    :
+    <span/>
+    } </Grid>
+
+
+<Grid  item> 
+{
+    (this.state.comments!="" && image.id===this.state.id) ?
+    this.state.comments
+    :
+    <span/>
+    }     
+</Grid>
 </Grid>
 
 <br/><br/>
@@ -411,9 +456,9 @@ image.tags.map(tag =>(
 
 
 
- <Grid key={this.state.responseData.id} container direction="row" alignItems="left" >
-<Input   key={this.state.responseData.id} variant="contained" placeholder="Add a Comment" style={{width:300,fontSize:'13px'}} onChange={this.onChangeComments} ></Input>
-<Button  key={this.state.responseData.id} variant="contained" color="primary" size="large" style={{fontSize:'10px'}} onClick={this.commentsHandler} value={image.id}>Add</Button>
+ <Grid  container direction="row" alignItems="left" >
+<Input    variant="contained" placeholder="Add a Comment" style={{width:300,fontSize:'13px'}} onChange={this.onChangeComments} ></Input>
+<Button   variant="contained" color="primary" size="large" style={{fontSize:'10px'}} onClick={() => this.commentsHandler(image.id)}>Add</Button>
 </Grid>
 
 
