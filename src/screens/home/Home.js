@@ -54,6 +54,7 @@ const styles = theme => ({
         transform: 'translateZ(0)',
         width: '200%',
         overflow:'hidden',  
+        paddingLeft:'10%',
          
     },
  
@@ -89,6 +90,7 @@ constructor(){
         menuListFlag:false,
         responseData:[],
         profilePicture:"",
+        userName:"",
         tags:"",
         
 
@@ -99,6 +101,7 @@ constructor(){
 componentWillMount(){
 let data=null; //request body remains null since its get
 let xhr=new XMLHttpRequest();
+let xhr1=new XMLHttpRequest();
 let that=this;
 xhr.addEventListener("readystatechange",function(){
 
@@ -106,16 +109,49 @@ if(this.readyState ===4){
     console.log(JSON.parse(this.responseText)); //convert this string to json object
     that.setState({
         responseData:JSON.parse(this.responseText).data,
-       profilePicture:JSON.parse(this.responseText).data[0].user.profile_picture
+       
 
     })
+
 }
+
 })
+
+xhr1.addEventListener("readystatechange",function(){
+    if(this.readyState ===4){
+        console.log(JSON.parse(this.responseText)); //convert this string to json object
+        that.setState({
+           profilePicture:JSON.parse(this.responseText).data.profile_picture,
+           userName:JSON.parse(this.responseText).data.username
+        })
+    
+    }
+    
+    })
+
+
+
+
+
+
 xhr.open("GET",this.props.baseUrl+"users/self/media/recent?access_token=18968665551.0214b37.f2788433f83a46cda0dc99d50173a761");
 xhr.setRequestHeader("Cache-Control","no-cache");
 xhr.send(data);
 
+xhr1.open("GET",this.props.baseUrl+"users/self/?access_token=18968665551.0214b37.f2788433f83a46cda0dc99d50173a761");
+xhr1.setRequestHeader("Cache-Control","no-cache");
+xhr1.send(data);
+
+
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -134,10 +170,20 @@ likeCount:this.state.likeCount +1
     else{
         this.setState({
             isEdit:false,  
-            likeCount:this.state.likeCount -1   
+            likeCount:this.state.likeCount  -1   
     })
 
 } 
+
+}
+
+
+
+
+
+searchEventHandler=(e)=>{
+
+
 
 }
 
@@ -190,7 +236,8 @@ menuListVisibilityHandler=(e)=>{
                            
 
                             <span className="header-search-box">
-                               <TextField  placeholder="Search..." margin="normal" style={{backgroundColor:'#c0c0c0',float:'right',marginRight:'160px',marginBottom:'15px',width:'300px',borderRadius:'4px'}}
+                               <TextField  placeholder="Search..." margin="normal" style={{backgroundColor:'#c0c0c0',float:'right',marginRight:'160px',marginBottom:'15px',width:'300px',borderRadius:'4px', }}
+                                // below needed to add embedded search icon
                                 InputProps={{
                                     disableUnderline: true,
                                     startAdornment: (
@@ -199,6 +246,8 @@ menuListVisibilityHandler=(e)=>{
                                       </InputAdornment>
                                      )
                                     }}
+
+                                    onChange={this.searchEventHandler}
                                 />
                                   
                                  
@@ -236,21 +285,23 @@ menuListVisibilityHandler=(e)=>{
 
 
 
+{/* ------------------------------------------------------------------------------------------------------- */}
+
 
 
 <div className="flex-container">
                
     <GridList cellHeight={750}  className={classes.gridListImages} cols ={3} >
-       
-{
-
-
-
     
+
+            
+       
+{ 
 this.state.responseData.map(image =>(
 
-    
-
+   
+   
+   
 
     
 
@@ -258,14 +309,13 @@ this.state.responseData.map(image =>(
 
 
     /* inner content of each grid/card starts from below     */
-
-    <Card key={this.state.responseData.id}  className= "parentGridContainer">
+    <Card key={this.state.responseData.id} className="parentGridContainer">
  
 <CardHeader key={this.state.responseData.id} avatar={
   <Avatar alt="Remy Sharp" src={this.state.profilePicture} className={classes.avatar}/> 
 }
 
-title={image.user.username}
+title={this.state.userName}
 
 subheader={image.created_time}
 />
@@ -280,8 +330,8 @@ subheader={image.created_time}
 
 
     
-<img key={this.state.responseData.id} className="image-poster" src={image.images.standard_resolution.url} alt={image.title}/>
-
+<img  className="image-poster" src={image.images.standard_resolution.url} alt={image.title}/>
+<br/>
 <Divider/>
 
 
@@ -293,34 +343,45 @@ subheader={image.created_time}
 
 <Grid  key={this.state.responseData.id} container direction="column" alignItems="left" >
 
-<Grid  item xs ><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',fontSize:'10px'}}>{image.caption.text}</Typography></Grid>
-<Grid  item xs >
+<Grid  item xs key={this.state.responseData.id}><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',fontSize:'10px'}}>{image.caption.text}</Typography></Grid>
+<Grid  item xs key={this.state.responseData.id} >
 {
+
+   /*  confusion on what comes within {}, and what not */
 image.tags.map(tag =>(
 
-        <Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',color:'blue',fontSize:'10px'}}> #{tag}</Typography>
+        <Typography key={this.state.responseData.id} variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',color:'blue',fontSize:'10px'}}> #{tag}</Typography>
  ))}
         </Grid>
 
    
     
-<Grid  item xs >
+<Grid key={this.state.responseData.id} item xs >
 
-<Grid  container direction="row" alignItems="center" >
-<Grid  item>
+<Grid key={this.state.responseData.id} container direction="row" alignItems="center" >
+<Grid key={this.state.responseData.id} item>
 
     {/* eighter implement conditional rendering or control display of elements dynamically */}
-{!(this.state.isEdit) ?
-<FavoriteBorderIcon  className={this.state.favoriteBorderIconDisplay} style={{marginLeft:'-3px'}}   onClick={this.likeIconClickHandler}/> 
+{
+   
+    
+    !(this.state.isEdit) ?
+    
+<FavoriteBorderIcon   key={this.state.responseData.id} className={this.state.favoriteBorderIconDisplay} style={{marginLeft:'-3px'}}   onClick={this.likeIconClickHandler}/> 
 :
-<Favorite  className={this.state.favoriteIconDisplay}  style={{marginLeft: '-3px',color:'red'}} onClick={this.likeIconClickHandler}/>
+<Favorite  key={this.state.responseData.id} className={this.state.favoriteIconDisplay}  style={{marginLeft: '-3px',color:'red'}}  onClick={this.likeIconClickHandler}/>
 }
+&nbsp;
 </Grid>
 
-<Grid key={this.state.responseData.id} item >
-    <Typography   variant="caption" component="caption"  style={{textAlign:'center',align:'center',display:'inline',fontSize:'15px'}}>
-    { (image.likes.count)>0 ? <span>{image.likes.count}</span> :<span></span>  }
-    </Typography></Grid>
+<Grid key={this.state.responseData.id} item > 
+
+
+    <Typography  key={this.state.responseData.id}  variant="caption" component="caption"  style={{textAlign:'center',align:'center',display:'inline',fontSize:'15px'}}>
+    { (image.likes.count)>0 ? <span> {image.likes.count + this.state.likeCount } likes</span> :<span></span>  }
+    </Typography>
+
+</Grid>
 </Grid>
 
 
@@ -332,8 +393,8 @@ image.tags.map(tag =>(
 
 <Grid key={this.state.responseData.id} container  direction="row" alignItems="center">
     {/* can below 2 items be dynmically added each time on ADD event ? */}
-<Grid item  style={{fontWeight:'bold'}}>harshal_nrn: </Grid>
-<Grid id={image.id} item> {this.state.comments}     </Grid>
+<Grid key={this.state.responseData.id} item  style={{fontWeight:'bold'}}>harshal_nrn: </Grid>
+<Grid key={this.state.responseData.id} item> {this.state.comments}     </Grid>
 </Grid>
 
 <br/><br/>
@@ -351,8 +412,8 @@ image.tags.map(tag =>(
 
 
  <Grid key={this.state.responseData.id} container direction="row" alignItems="left" >
-<Input   variant="contained" placeholder="Add a Comment" style={{width:300,fontSize:'13px'}} onChange={this.onChangeComments} ></Input>
-<Button  variant="contained" color="primary" size="large" style={{fontSize:'10px'}} onClick={this.commentsHandler} value={image.id}>Add</Button>
+<Input   key={this.state.responseData.id} variant="contained" placeholder="Add a Comment" style={{width:300,fontSize:'13px'}} onChange={this.onChangeComments} ></Input>
+<Button  key={this.state.responseData.id} variant="contained" color="primary" size="large" style={{fontSize:'10px'}} onClick={this.commentsHandler} value={image.id}>Add</Button>
 </Grid>
 
 
