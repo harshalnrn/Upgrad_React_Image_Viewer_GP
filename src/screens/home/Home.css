@@ -56,15 +56,6 @@
     padding:13px;
 }
 
-.parentGridContainer{
-    border-width:0.5px;  
-    margin: 25px;
-    border-style:groove;
-    display: block;
-    
-    height:500px;
-
-}
 .flex-container {
     display: flex;
      margin-left:10%; 

@@ -47,6 +47,17 @@ const styles = theme => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
     },
+
+
+    card: {
+        borderWidth:'0.5px',
+        margin: '10px',
+        borderStyle:'groove',
+        display: 'block',
+        minWidth:'590px',
+        height:'500px',
+
+    },
    
     gridListImages: {
       display:'flex',
@@ -54,7 +65,7 @@ const styles = theme => ({
         transform: 'translateZ(0)',
         width: '200%',
         overflow:'hidden',  
-        paddingLeft:'10%',
+        
          
     },
  
@@ -70,6 +81,7 @@ const styles = theme => ({
          
          
       }
+
 });
 
 
@@ -276,7 +288,7 @@ handleClickAway = (e) => {
                            
 
                             <span className="header-search-box">
-                               <TextField  placeholder="Search..." margin="normal" style={{backgroundColor:'#c0c0c0',float:'right',marginRight:'160px',marginBottom:'15px',width:'300px',borderRadius:'4px', }}
+                               <TextField  placeholder="Search..." margin="normal" style={{backgroundColor:'#c0c0c0',float:'right',marginRight:'160px',marginTop: '20px', width:'300px',borderRadius:'4px', }}
                                 // below needed to add embedded search icon
                                 InputProps={{
                                     disableUnderline: true,
@@ -311,8 +323,8 @@ handleClickAway = (e) => {
 <Paper id="menu-list-grow">
                 <ClickAwayListener  onClickAway={this.handleClickAway} >
                   <MenuList style={{borderRadius:'15px'}}>
-                    <MenuItem /* onClick={handleClose} */>Profile</MenuItem>
                     <MenuItem /* onClick={handleClose} */>My account</MenuItem>
+                    <Divider/>
                     <MenuItem /* onClick={handleClose} */>Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
@@ -342,7 +354,7 @@ handleClickAway = (e) => {
 this.state.responseData.map(image =>(
 
     /* inner content of each grid/card starts from below     */
-    <Card key={image.id} className="parentGridContainer">
+    <Card key={image.id} className={classes.card}>
  
 <CardHeader avatar={
   <Avatar alt="Remy Sharp" src={this.state.profilePicture} className={classes.avatar}/> 

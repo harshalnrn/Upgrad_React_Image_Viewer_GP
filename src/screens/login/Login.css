@@ -12,12 +12,11 @@
     align-self: flex-start;
     margin-left: 10px;
     display: inline-block;
-    margin-top: 15px;
+    margin-top: 20px;
    
   
 }
-.header-search-box{ 
-}
+
 
 .card-container{
     height: 58vh;
