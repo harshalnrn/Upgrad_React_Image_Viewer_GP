@@ -4,6 +4,19 @@ import { withStyles } from '@material-ui/core/styles';
 import './Profile.css';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Typography } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import EditIcon from '@material-ui/icons/Edit';
+import Modal from 'react-modal';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 
 const styles = theme => ({
@@ -133,6 +146,21 @@ class Profile extends Component {
         xhr.send(data);
     }
 
+    headerlogoClickHandler = () => {
+        // Go to the Home page
+    }
+
+    profileiconClickHandler = event => {
+        this.setState({open: true})
+        this.setState({anchorE1: event.currentTarget})
+    }
+
+    closeMenuHandler = () => {
+        this.setState({open: false})
+        // clear session storage and redirect to Login Page
+    }
+
+    
     render() {
         return (
             <div>
