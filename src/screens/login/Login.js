@@ -67,11 +67,13 @@ class Login extends Component{
 }
 
     inputUserNameChangeHandler =(e) => {
-        this.setState({username: e.target.value})
+        this.setState({username: e.target.value});
+        this.setState({failedLogIn: false});
     }
 
     inputLoginPasswordChangeHandler =(e) => {
-        this.setState({loginPassword: e.target.value})
+        this.setState({loginPassword: e.target.value});
+        this.setState({failedLogIn: false});
     }
 
     render() {
@@ -107,8 +109,15 @@ class Login extends Component{
                          <FormHelperText className={this.state.loginPasswordRequired}> <span className='red'>
                             required </span>
                         </FormHelperText>              
-                    </FormControl><br /> <br />
+                    </FormControl><br />
+                    {this.state.failedLogIn === true && 
+                     <FormControl>
+                      <span className='failure-text'>
+                            Incorrect username and/or password </span>
+                </FormControl> }
+                <br />
                     <Button className={classes.loginBtn} variant='contained' color='primary' onClick={this.loginClickHandler}>LOGIN</Button>
+                    <br /> <br />
                     </CardContent>
                 </Card>
             </div>
@@ -117,5 +126,7 @@ class Login extends Component{
         )
     }
 }
+
+                   
 
 export default withStyles(styles) (Login);
