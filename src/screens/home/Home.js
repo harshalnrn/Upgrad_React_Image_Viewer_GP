@@ -351,11 +351,7 @@ this.state.responseData.map(image =>(
 
 title={this.state.userName}
 
-subheader={
-    var date=new Date(image.created_time * 1000);
-
-    
-    }
+subheader={image.created_time}
 />
 
 {/* <Grid container direction="row" alignItems="center">                     {/* remember why key is needed for each element within map */}
