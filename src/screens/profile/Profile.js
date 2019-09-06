@@ -253,6 +253,37 @@ class Profile extends Component {
         this.setState({likecount: this.state.post.likes.count})
     }
 
+    iconClickHandler = (e) => {
+        console.log(this.state.likecount)
+        if (this.state.iconChange === false)
+        {
+            this.setState({iconChange: true});
+            this.setState({
+                likecount: this.state.likecount+1
+            });
+            console.log(this.state.likecount);
+        }
+        else{
+            this.setState({iconChange: false});
+            this.setState({
+                likecount: this.state.likecount-1
+            });
+            console.log(this.state.likecount);
+        }
+    }
+
+    onChangeCommentHandler = (e) => {
+        this.setState({flexiblecomment: e.target.value})
+    }
+
+    commentClickHandler = () =>{
+        this.setState({addclick: true});
+        this.setState({finalcomment: this.state.flexiblecomment})
+        this.setState({
+            comments: this.state.finalcomment
+        });
+    }
+
     
 
 

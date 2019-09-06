@@ -1,0 +1,154 @@
+::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: grey;
+  }
+  
+  .app-header {
+    background-color:  #263238;
+    height: 68px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.header-logo{
+    color: #fff;
+    font-size: 18px;
+    align-self: flex-start;
+    margin-left: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.avatar-logo {
+    margin-left: auto;
+    margin-top: 15px;
+    margin-right: 22px;
+    cursor: pointer;
+}
+
+.information-section-container{
+    width: 50%;
+    height: 40%;
+    margin-left: 25%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.posts-text-information-section{
+    font-size: 11px;
+}
+.follows-text-information-section{
+    margin-left: 75px;
+    font-size: 11px;
+}
+.followedby-text-information-section{
+    margin-left: 75px;
+    font-size: 11px;
+}
+
+.fullname-text-information-section{
+    font-size: 17px;
+}
+
+.dispNone{
+    display: none;
+}
+
+.dispBlock{
+    display: block;
+}
+
+.posts-flex-container{
+    display: flex;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 3%;
+}
+
+.released-movie-grid-item {
+    cursor: pointer;
+}
+
+/* .post-modal-flex-container {
+   
+} */
+
+.left-container-modal {
+    float: left;
+}
+
+.post-style{
+    height: 380px;
+    width: 380px;
+    margin-top: 12px;
+}
+
+.right-container-modal{
+    float: right;
+}
+.right-modal-contents {
+    display: inline;
+}
+
+.temp{
+    display: block;
+}
+
+hr {
+    margin-left: 20px;
+    color: lightgrey;
+}
+
+.right-container-intro{
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+}
+
+.user-comments{
+    height: 235px;
+}
+
+.likes-count {
+    margin-left: 13px;
+    font-size: 20px;
+}
+
+.like-container-modal {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-container-modal {
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+    margin-top: 6px;
+}
+
+.comment-modal {
+    width: 500px;
+}
+
+.user-comments {
+    margin-left: 20px;
+}
+
+.user-comment-span{
+    font-weight: 500;
+}
