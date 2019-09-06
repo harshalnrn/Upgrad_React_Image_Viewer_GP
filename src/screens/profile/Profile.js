@@ -1,4 +1,100 @@
 import React,{Component} from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import { withStyles } from '@material-ui/core/styles';
+import './Profile.css';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
+
+const styles = theme => ({
+    avatar: {
+      margin: 10,
+      backgroundColor: 'black'
+    },
+    postavatar: {
+        marginTop: 10,
+        float: 'right'
+      },
+    bigAvatar: {
+        margin: 10,
+        width: 120,
+        height: 120,
+        backgroundColor: 'black',
+      },
+
+    menuControl: {
+        marginTop: 5,
+    },
+
+    infouserName: {
+        fontStyle: 'bold',
+        fontSize: '25px',
+        marginLeft: 54,
+        marginTop: 16,
+        height: 70
+    },
+    fab: {
+        margin: theme.spacing(2),
+      },
+
+      formControl: {
+        margin: theme.spacing.unit,
+      },
+
+      title: {
+        marginTop: '10px',
+        fontSize: '1.7rem'
+    },
+    editBtn: {
+        marginLeft: '7px'
+    },
+    addBtn: {
+        fontSize: 17,
+        width: 80,
+        cursor: 'pointer',
+        marginLeft: 15,
+        marginTop: 7
+    },
+    gridList: {
+        width: 1200,
+        height: 380,
+        cusrsor: 'pointer',
+      },
+      modalUsername : {
+        marginTop: 15,
+        marginLeft: 13,
+        fontSize: '1rem',
+        fontWeight: 500,
+      },
+      captionName: {
+          marginLeft: 20,
+          fontSize: '0.9rem',
+          fontWeight: 400
+      },
+      arrayTags: {
+        marginLeft: 20,
+        fontSize: '0.9rem',
+        fontStyle: 'italic',
+        fontWeight: 300,
+        color: '#add8e6',
+        opacity: 2.0,
+      },
+      favBorderIcon : {
+        marginLeft: 15,
+        fontSize: 40,
+        marginTop: 10
+    },
+      favIcon : {
+          marginTop: 10,
+          marginLeft: 15,
+          fontSize: 40,
+          color: 'red'
+      },
+      likeText: {
+          marginTop: 15
+      }
+
+  });
 
 class Profile extends Component {
 
@@ -62,4 +158,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
+export default withStyles(styles) (Profile);
