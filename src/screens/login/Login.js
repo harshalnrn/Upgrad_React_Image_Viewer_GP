@@ -10,6 +10,23 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 330,
+        maxWidth: 330
+    },
+    title: {
+        marginTop: '10px',
+        fontSize: '1.7rem'
+    },
+
+    loginBtn: {
+        marginLeft: '8px'  
+    }
+
+})
 
 class Login extends Component{
 
