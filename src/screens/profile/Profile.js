@@ -351,6 +351,38 @@ class Profile extends Component {
                          <span key={tag + "grid"}>#{tag}&nbsp;</span>
                             )}
                         </Typography>
+                        <div className="user-comments">
+                            {this.state.addclick === true &&
+                        <Typography>
+                        <span className="user-comment-span">{this.state.post.user.username}:</span> &nbsp; {this.state.finalcomment}
+                            </Typography> }
+                        </div>
+                        <div className= "like-container-modal">
+                        { this.state.iconChange === false
+                        ? <FavoriteBorderIcon className = {classes.favBorderIcon} onClick= {this.iconClickHandler} />                      
+                        : <FavoriteIcon className={classes.favIcon} onClick= {this.iconClickHandler} />
+                        }
+                        <Typography className = {classes.likeText}>
+                        <span className="likes-count">{this.state.likecount}&nbsp;likes</span>
+                        </Typography>
+                        </div>
+                        <div className = "comment-container-modal">
+                        <FormControl>
+                        <InputLabel htmlFor="comment">Add a Comment</InputLabel>
+                        <Input id ="comment" variant="contained" type= "text" className="comment-modal" onChange={this.onChangeCommentHandler}></Input>
+                        </FormControl>
+                        <Typography>
+                        <Button  variant="contained" color="primary" className={classes.addBtn} onClick={this.commentClickHandler}>ADD</Button>
+                        </Typography>
+                        </div>
+                        </div>
+                        </div>
+                    
+                    </Modal>
+                
+            </div> 
+        </div>
+
         )
     }
 }
