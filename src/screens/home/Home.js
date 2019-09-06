@@ -34,7 +34,6 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import { CardHeader } from '@material-ui/core';
 import Moment from 'react-moment';
-// import SearchedImage from '../home/SearchedImage.js';
 
 
 
@@ -96,6 +95,7 @@ constructor(){
         tags:"",
         id:"",
         searchedImages:[],
+        outsideClick:false,
     
         
 
@@ -240,9 +240,16 @@ this.setState({
 menuListVisibilityHandler=(e)=>{
 
     this.setState({
+        outsideClick:false,
         menuListFlag:true
     })
 }
+
+handleClickAway = (e) => {
+    this.setState({
+        outsideClick:true
+    })
+  }
 
 
 
@@ -299,10 +306,10 @@ menuListVisibilityHandler=(e)=>{
                         </header> 
 
 
-{(this.state.menuListFlag) ?
+{(this.state.menuListFlag && !this.state.outsideClick) ?
 <div className='menuList'>
 <Paper id="menu-list-grow">
-                <ClickAwayListener /* onClickAway={handleClose} */>
+                <ClickAwayListener  onClickAway={this.handleClickAway} >
                   <MenuList style={{borderRadius:'15px'}}>
                     <MenuItem /* onClick={handleClose} */>Profile</MenuItem>
                     <MenuItem /* onClick={handleClose} */>My account</MenuItem>
