@@ -298,7 +298,16 @@ class Profile extends Component {
                     <Button className={classes.editBtn} variant='contained' color='primary' 
                     onClick={this.updateClickHandler.bind(this, this.state.editname)}>UPDATE</Button>
                 </Modal>
-
+                
+                <div className="posts-flex-container">
+                    
+                    <GridList cellHeight={250} cols={3} className={classes.gridList}>
+                        {this.state.posts.map(post => (
+                            <GridListTile onClick= {() => this.postModalOpenHandler(post.id)} className="released-movie-grid-item" key={"grid" + post.id}>
+                                <img src={post.images.standard_resolution.url} className="movie-poster" alt={post.images} />
+                            </GridListTile>
+                        ))}
+                    </GridList>
         )
     }
 }
