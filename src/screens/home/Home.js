@@ -297,7 +297,7 @@ handleClickAway = (e) => {
                   
 <span style={{float:'right',marginRight:'-420px'}}>
 <IconButton onClick={this.menuListVisibilityHandler}> 
-<img src={this.state.profilePicture}  style={{height:'50px',width:'50px',borderRadius:'25px'}} alt='profile image not available'/> 
+<img src={this.state.profilePicture}  style={{height:'50px',width:'50px',borderRadius:'25px'}} alt=''/> 
 
 </IconButton>
 </span>
