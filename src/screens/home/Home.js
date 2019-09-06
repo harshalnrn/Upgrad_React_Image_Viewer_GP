@@ -1,24 +1,16 @@
 import React,{Component} from 'react';
 import '../login/Login.css';
 import './Home.css';
-import profilePic from '../../../src/photo.jpg';
 import {withStyles} from '@material-ui/core/styles';
-import imageData from '../../common/imageData.js';
 import Grid from '@material-ui/core/Grid';
 import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import FormControl from '@material-ui/core/FormControl';
 import Typography from'@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-import Select from'@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-import Checkbox  from '@material-ui/core/Checkbox';
-import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Favorite from '@material-ui/icons/Favorite';
@@ -29,11 +21,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
 import { CardHeader } from '@material-ui/core';
-import Moment from 'react-moment';
 
 
 
@@ -362,7 +351,11 @@ this.state.responseData.map(image =>(
 
 title={this.state.userName}
 
-subheader={image.created_time}
+subheader={
+    var date=new Date(image.created_time * 1000);
+
+    
+    }
 />
 
 {/* <Grid container direction="row" alignItems="center">                     {/* remember why key is needed for each element within map */}
@@ -388,14 +381,14 @@ subheader={image.created_time}
 
 <Grid   container direction="column" alignItems="left" >
 
-<Grid  item xs ><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',fontSize:'10px'}}>{image.caption.text}</Typography></Grid>
+<Grid  item xs ><Typography variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',fontSize:'14px'}}>{image.caption.text}</Typography></Grid>
 <Grid  item xs  >
 {
 
    /*  confusion on what comes within {}, and what not */
 image.tags.map(tag =>(
 
-        <Typography key = {image.id} variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',color:'blue',fontSize:'10px'}}> #{tag}</Typography>
+        <Typography key = {image.id} variant="caption" component="caption"  style={{padding:0,textAlign:'center',align:'center',display:'inline',color:'blue',fontSize:'13px'}}> #{tag}</Typography>
  ))}
         </Grid>
 
