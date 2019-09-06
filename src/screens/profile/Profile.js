@@ -324,6 +324,33 @@ class Profile extends Component {
                             </GridListTile>
                         ))}
                     </GridList>
+
+                    <Modal isOpen={this.state.postmodalIsOpen} contentLabel='Post Modal' ariaHideApp={false}
+                onRequestClose={this.closeModalHandler}
+                style={newStyles}>
+
+                   
+                        <div className = "post-modal-flex-container">
+                        <div className = "left-container-modal">
+                              <img src ={this.state.post.images.standard_resolution.url} className="post-style" />
+                        </div>
+
+                        <div className= "right-container-modal">
+                            <div className="right-container-intro">                
+                        <Avatar alt={this.state.post.user.username} src={this.state.post.user.profile_picture} className={classes.postavatar} />
+                        <Typography className = {classes.modalUsername}>
+                        {this.state.post.user.username}
+                        </Typography>
+                        </div>
+                        <hr />
+                        <Typography className={classes.captionName}>
+                            {this.state.post.caption.text.substr(0, this.state.post.caption.text.indexOf('\n'))}
+                        </Typography>
+                        <Typography className = {classes.arrayTags}>
+                         {this.state.post.tags.map((tag,key) =>
+                         <span key={tag + "grid"}>#{tag}&nbsp;</span>
+                            )}
+                        </Typography>
         )
     }
 }
