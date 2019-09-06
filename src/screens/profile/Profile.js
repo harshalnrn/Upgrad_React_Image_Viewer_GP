@@ -203,6 +203,25 @@ class Profile extends Component {
         // clear session storage and redirect to Login Page
     }
 
+    openEditModalHandler = () => {
+        this.setState({modalIsOpen: true});
+        this.setState({editnameRequired: 'dispNone'});
+    }
+
+    closeModalHandler = () => {
+        this.setState({modalIsOpen: false});
+        this.setState({postmodalIsOpen: false});
+        this.setState({url: ""});
+        this.setState({profile_picture: ""});
+        this.setState({caption: ""});
+        this.setState({tags: []});
+        this.setState({likecount: 0});
+        this.setState({iconChange: false});
+        this.setState({comments: ""});
+        this.setState({addclick: false});
+        
+    }
+
 
     render() {
         return (
