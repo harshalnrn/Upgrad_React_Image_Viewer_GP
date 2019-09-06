@@ -242,6 +242,27 @@ class Profile extends Component {
             </Typography>        
         </div>
 
+        <Modal isOpen={this.state.modalIsOpen} contentLabel='Edit Modal' ariaHideApp={false}
+                onRequestClose={this.closeModalHandler}
+                style={customStyles}>
+
+                    <FormControl className={classes.formControl}>
+                        <Typography className={classes.title} color="textPrimary">
+                            EDIT
+                        </Typography>
+                        </FormControl> <br />
+                        <FormControl required className={classes.formControl}>
+                        <InputLabel htmlFor='editname'>Full Name</InputLabel>
+                        <Input id='editname' type='text' editname = {this.state.editname} 
+                        onChange={this.editFullNameChangeHandler} /> 
+                        <FormHelperText className={this.state.editnameRequired}> <span className='red'>
+                            required </span>
+                        </FormHelperText>        
+                    </FormControl> <br /> <br />
+                    <Button className={classes.editBtn} variant='contained' color='primary' 
+                    onClick={this.updateClickHandler.bind(this, this.state.editname)}>UPDATE</Button>
+                </Modal>
+
         )
     }
 }
