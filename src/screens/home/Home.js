@@ -434,7 +434,7 @@ image.tags.map(tag =>(
 
 <Grid  item> 
 {
-    (this.state.comments!="" && image.id===this.state.id) ?
+    (this.state.comments!="" &&image.id===this.state.id) ?
     this.state.comments
     :
     <span/>
@@ -455,10 +455,16 @@ image.tags.map(tag =>(
 
 
 
-
+ {
+         (this.state.onChangeComments!="") ?
+     <InputLabel style={{fontSize: '10px', color:'blue'}}> Add Comment</InputLabel> :
+     <span/>
+     }
  <Grid  container direction="row" alignItems="left" >
+   
+     
 <Input    variant="contained" placeholder="Add a Comment" style={{width:300,fontSize:'13px'}} onChange={this.onChangeComments} ></Input>
-<Button   variant="contained" color="primary" size="large" style={{fontSize:'10px'}} onClick={() => this.commentsHandler(image.id)}>Add</Button>
+<Button   variant="contained" color="primary" size="large" style={{fontSize:'10px',margin:'2px'}} onClick={() => this.commentsHandler(image.id)}>Add</Button>
 </Grid>
 
 
