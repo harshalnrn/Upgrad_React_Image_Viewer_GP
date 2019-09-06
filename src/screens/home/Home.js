@@ -95,6 +95,8 @@ constructor(){
         userName:"",
         tags:"",
         id:"",
+        searchedImages:[],
+    
         
 
     }
@@ -191,16 +193,28 @@ likeCount:this.state.likeCount +1
 
 
 searchEventHandler=(e)=>{
-
+console.log('inside search event handler')
+this.setState({
+    searchedImages:[],
+    responseData:this.state.searchedImages
+})
 this.state.responseData.map(image =>{
 
-if((image.caption.text).contains(e.target.value))
+    console.log(e.target.value)
+if((image.caption.text).includes(e.target.value)){
+this.state.searchedImages.push(image);
+}
+})
 
+if (this.state.searchedImages.length>0) {
+console.log('size of array is greater than 0')
 this.setState({
-    isSearched:true
+    responseData:this.state.searchedImages
 })
+}
 
-})
+
+
 
 }
 
@@ -316,15 +330,9 @@ menuListVisibilityHandler=(e)=>{
             
        
 { 
+
+
 this.state.responseData.map(image =>(
-
-    //  (this.state.isSearched) ?
-  /*    <div>
-<SearchedImage  image={image}  />   //add props to child component, to pass parameters
-</div> */
-  //  :
-
-
 
     /* inner content of each grid/card starts from below     */
     <Card key={image.id} className="parentGridContainer">
