@@ -208,8 +208,8 @@ class Profile extends Component {
             }
         })
 
-        xhr.open("GET", "https://api.instagram.com/v1/users/self/?access_token=8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784");
-        xhr1.open("GET", "https://api.instagram.com/v1/users/self/media/recent?access_token=8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784");
+        xhr.open("GET", this.props.baseUrl+"users/self/?access_token=8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784");
+        xhr1.open("GET", this.props.baseUrl+"users/self/media/recent?access_token=8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784");
         xhr.setRequestHeader("Cache-Control", "no-cache");
         xhr1.setRequestHeader("Cache-Control", "no-cache");
         xhr1.send(data);
@@ -218,6 +218,7 @@ class Profile extends Component {
 
     headerlogoClickHandler = () => {
         // Go to the Home page
+        this.props.history.push('/home')
     }
 
     profileiconClickHandler = event => {
@@ -227,7 +228,8 @@ class Profile extends Component {
 
     closeMenuHandler = () => {
         this.setState({ open: false })
-        // clear session storage and redirect to Login Page
+        this.props.history.push('/')
+        sessionStorage.clear()
     }
 
     openEditModalHandler = () => {

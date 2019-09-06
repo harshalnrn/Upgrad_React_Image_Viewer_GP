@@ -1,9 +1,10 @@
-.app-header{
+.loginHeader{
     background-color:  #263238;
     height: 68px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    
 }
 
 .header-logo{
@@ -12,7 +13,8 @@
     align-self: flex-start;
     margin-left: 10px;
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 15px;
+    margin-bottom: 17px;
    
   
 }

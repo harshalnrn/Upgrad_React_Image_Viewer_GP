@@ -252,6 +252,14 @@ handleClickAway = (e) => {
     })
   }
 
+  profileRouter =()=>{
+    this.props.history.push('/profile')
+  }
+
+  logout=()=>{
+this.props.history.push('/')
+sessionStorage.clear()
+  }
 
 
 //----------------------------------------------------------------------------------------
@@ -271,12 +279,12 @@ handleClickAway = (e) => {
               
               
                        
-             <header className="app-header">
+             <header className="header">
                 <div>
                             <span className="header-logo">Image Viewer</span>
                            
 
-                            <span className="header-search-box">
+                            <span >
                                <TextField  placeholder="Search..." margin="normal" style={{backgroundColor:'#c0c0c0',float:'right',marginRight:'160px',marginTop: '20px', width:'300px',borderRadius:'4px', }}
                                 // below needed to add embedded search icon
                                 InputProps={{
@@ -312,9 +320,9 @@ handleClickAway = (e) => {
 <Paper id="menu-list-grow">
                 <ClickAwayListener  onClickAway={this.handleClickAway} >
                   <MenuList style={{borderRadius:'15px'}}>
-                    <MenuItem /* onClick={handleClose} */>My account</MenuItem>
+                    <MenuItem  onClick={this.profileRouter} >My account</MenuItem>
                     <Divider/>
-                    <MenuItem /* onClick={handleClose} */>Logout</MenuItem>
+                    <MenuItem  onClick={this.logout} >Logout</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

@@ -26,11 +26,17 @@
     overflow:hidden;
     position:relative;
     width: 100%;
-   
-    
 
     
 } 
+
+.header{
+    background-color:  #263238;
+    height: 68px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 .dispNone{
     display: none;

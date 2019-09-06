@@ -59,7 +59,7 @@ class Login extends Component {
             if (this.state.username === username && this.state.loginPassword === password) {
                 this.setState({ failedLogIn: false })
                 sessionStorage.setItem('access-token', token);
-                this.props.history.push('/home/' + token);
+                this.props.history.push('/home/');
             }
             else {
                 this.setState({ failedLogIn: true })
@@ -83,7 +83,7 @@ class Login extends Component {
         const { classes } = this.props;
         return (
             <div>
-                <header className="app-header">
+                <header className="loginHeader">
                     <span className="header-logo">Image Viewer</span>
                 </header>
 
