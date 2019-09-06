@@ -36,17 +36,35 @@ class Login extends Component{
             username: "",
             loginPassword: "",
             usernameRequired: "dispNone",
-            loginPasswordRequired: "dispNone"
+            loginPasswordRequired: "dispNone",
+            failedLogIn: "false" 
         }
     }
 
+    
     loginClickHandler= () => {
+        let username = "validuser";
+        let password = "12345";
+        let token =  "8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784";
+
+
         this.state.username === "" ? this.setState({usernameRequired: 'dispBlock'}) 
         : this.setState({usernameRequired: 'dispNone'})
 
         this.state.loginPassword === "" ? this.setState({loginPasswordRequired: 'dispBlock'}) 
         : this.setState({loginPasswordRequired: 'dispNone'})
+
+       if (this.state.username !== "" && this.state.loginPassword !== ""){
+           if (this.state.username === username && this.state.loginPassword === password) {
+        this.setState({failedLogIn: false})
+        sessionStorage.setItem('access-token', token);
+        this.props.history.push('/home/'+token); 
+       }
+       else {
+        this.setState({failedLogIn: true})
+       }
     }
+}
 
     inputUserNameChangeHandler =(e) => {
         this.setState({username: e.target.value})
