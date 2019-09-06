@@ -111,6 +111,49 @@ const styles = theme => ({
 
 class Profile extends Component {
 
+    constructor() {
+        super();
+        this.state = {
+            profilepicture: "",
+            username: "",
+            media: "",
+            follows: "",
+            followed_by: "",
+            fullname: "",
+            open: false,
+            anchorE1: null,
+            modalIsOpen: false,
+            editname: "",
+            editnameRequired: "",
+            posts: [],
+            postModalOpenHandler: false,
+            iconChange: false,
+            likecount: 0,
+            post: {
+                id: "",
+                images:{
+                    standard_resolution: {
+                        url: ""
+                    }
+                },
+                user:{
+                    profile_picture: "",
+                    username:""
+                },
+                caption:{
+                    text:""
+                },
+                tags:[],
+                likes:{
+                    count: 0
+                },
+                comments:""
+            },
+            flexiblecomment: "",
+            finalcomment: "",
+            addclick: false,
+        }
+    }
 
     componentWillMount() {
         let data = null;
@@ -160,7 +203,7 @@ class Profile extends Component {
         // clear session storage and redirect to Login Page
     }
 
-    
+
     render() {
         return (
             <div>
