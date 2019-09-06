@@ -36,13 +36,26 @@ class Profile extends Component {
         xhr1.send(data);
         xhr.send(data);
     }
-    
+
     render() {
         return (
             <div>
             <header className="app-header">
-                <span className="header-logo" onClick={this.headerlogoClickHandler}>Image Viewer </span>
 
+                <span className="header-logo" onClick={this.headerlogoClickHandler}>Image Viewer </span>
+            <Avatar alt={this.state.username} src={this.state.profilepicture} className="avatar-logo" 
+                onClick = {this.profileiconClickHandler}/>
+            <Menu className = {classes.menuControl}
+                id="simple-menu"
+                open={this.state.open}
+                anchorEl={this.state.anchorE1}
+                onClose = {this.closeMenuHandler}
+                getContentAnchorEl={null}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center", marginBottom: '5px' }}
+                transformOrigin={{ vertical: "top", horizontal: "center" }}             
+            >
+                <MenuItem onClick={this.closeMenuHandler}>Logout</MenuItem>
+            </Menu>
                 </header>
                 </div>
         )
