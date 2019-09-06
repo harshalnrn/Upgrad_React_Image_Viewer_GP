@@ -340,7 +340,6 @@ class Profile extends Component {
                 <div className="information-section-container">
                     <Avatar alt={this.state.username} src={this.state.profilepicture} className={classes.bigAvatar} />
                     <Typography className={classes.infouserName}>
-
                         <div className="temp">
                             <span className="user-name">{this.state.username}</span> <br />
                             <span className="posts-text-information-section">Posts: {this.state.media}</span>
@@ -392,7 +391,6 @@ class Profile extends Component {
                         onRequestClose={this.closeModalHandler}
                         style={newStyles}>
 
-
                         <div className="post-modal-flex-container">
                             <div className="left-container-modal">
                                 <img src={this.state.post.images.standard_resolution.url} className="post-style" />
@@ -440,7 +438,6 @@ class Profile extends Component {
                             </div>
                         </div>
                     </Modal>
-
                 </div>
             </div>
 
