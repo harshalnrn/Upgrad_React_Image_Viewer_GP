@@ -18,7 +18,28 @@ import GridListTile from '@material-ui/core/GridListTile';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
+const customStyles = {
+    content:{
+        top : '58%',
+        left : '55%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
+    }
+}
 
+const newStyles = {
+    content:{
+        top : '52%',
+        left : '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        maxHeight: '250'
+    }
+}
 const styles = theme => ({
     avatar: {
       margin: 10,
@@ -285,9 +306,8 @@ class Profile extends Component {
     }
 
     
-
-
     render() {
+        const {classes} = this.props;
         return (
             <div>
             <header className="app-header">
