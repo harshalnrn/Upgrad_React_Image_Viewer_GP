@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import './Login.css';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,6 +10,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
+// Custom Styling with withStyles HOC
 const styles = theme => ({
 
     formControl: {
@@ -23,110 +24,112 @@ const styles = theme => ({
     },
 
     loginBtn: {
-        marginLeft: '8px'  
+        marginLeft: '8px'
     }
 
 })
 
-class Login extends Component{
+class Login extends Component {
 
+    // Setting State for the state variables in action
     constructor() {
         super();
-        this.state={
+        this.state = {
             username: "",
             loginPassword: "",
             usernameRequired: "dispNone",
             loginPasswordRequired: "dispNone",
-            failedLogIn: "false" 
+            failedLogIn: "false"
         }
     }
 
-    
-    loginClickHandler= () => {
+
+    loginClickHandler = () => {
         let username = "validuser";
         let password = "12345";
-        let token =  "8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784";
+        let token = "8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784";
 
+        this.state.username === "" ? this.setState({ usernameRequired: 'dispBlock' })
+            : this.setState({ usernameRequired: 'dispNone' })
 
-        this.state.username === "" ? this.setState({usernameRequired: 'dispBlock'}) 
-        : this.setState({usernameRequired: 'dispNone'})
+        this.state.loginPassword === "" ? this.setState({ loginPasswordRequired: 'dispBlock' })
+            : this.setState({ loginPasswordRequired: 'dispNone' })
 
-        this.state.loginPassword === "" ? this.setState({loginPasswordRequired: 'dispBlock'}) 
-        : this.setState({loginPasswordRequired: 'dispNone'})
-
-       if (this.state.username !== "" && this.state.loginPassword !== ""){
-           if (this.state.username === username && this.state.loginPassword === password) {
-        this.setState({failedLogIn: false})
-        sessionStorage.setItem('access-token', token);
-        this.props.history.push('/home/'+token); 
-       }
-       else {
-        this.setState({failedLogIn: true})
-       }
-    }
-}
-
-    inputUserNameChangeHandler =(e) => {
-        this.setState({username: e.target.value});
-        this.setState({failedLogIn: false});
+        if (this.state.username !== "" && this.state.loginPassword !== "") {
+            if (this.state.username === username && this.state.loginPassword === password) {
+                this.setState({ failedLogIn: false })
+                sessionStorage.setItem('access-token', token);
+                this.props.history.push('/home/' + token);
+            }
+            else {
+                this.setState({ failedLogIn: true })
+            }
+        }
     }
 
-    inputLoginPasswordChangeHandler =(e) => {
-        this.setState({loginPassword: e.target.value});
-        this.setState({failedLogIn: false});
+    // Username Change Handler
+    inputUserNameChangeHandler = (e) => {
+        this.setState({ username: e.target.value });
+        this.setState({ failedLogIn: false });
+    }
+
+    // Password Change Handler
+    inputLoginPasswordChangeHandler = (e) => {
+        this.setState({ loginPassword: e.target.value });
+        this.setState({ failedLogIn: false });
     }
 
     render() {
-        const {classes} = this.props;
-
+        const { classes } = this.props;
         return (
             <div>
-            <header className="app-header">
-                <span className="header-logo">Image Viewer</span>
-            </header>
+                <header className="app-header">
+                    <span className="header-logo">Image Viewer</span>
+                </header>
 
-            <div className="card-container">
-                <Card className="login-card">
-                    <CardContent>
-                        <FormControl className={classes.formControl}>
-                        <Typography className={classes.title} color="textPrimary">
-                            LOGIN
+                <div className="card-container">
+                    {/* Card Containing Username, Password fields and the required validation parameters */}
+                    <Card className="login-card">
+                        <CardContent>
+                            <FormControl className={classes.formControl}>
+                                <Typography className={classes.title} color="textPrimary">
+                                    LOGIN
                         </Typography>
-                        </FormControl> <br />
-                        <FormControl required className={classes.formControl}>
-                        <InputLabel htmlFor='username'>UserName</InputLabel>
-                        <Input id='username' type='text' username = {this.state.username} 
-                        onChange={this.inputUserNameChangeHandler} /> 
-                        <FormHelperText className={this.state.usernameRequired}> <span className='red'>
-                            required </span>
-                        </FormHelperText>        
-                    </FormControl> <br /> <br />
+                            </FormControl> <br />
+                            <FormControl required className={classes.formControl}>
+                                <InputLabel htmlFor='username'>UserName</InputLabel>
+                                <Input id='username' type='text' username={this.state.username}
+                                    onChange={this.inputUserNameChangeHandler} />
+                                <FormHelperText className={this.state.usernameRequired}> <span className='red'>
+                                    required </span>
+                                </FormHelperText>
+                            </FormControl> <br /> <br />
 
-                    <FormControl required className={classes.formControl}>
-                        <InputLabel htmlFor='loginPassword'>Password</InputLabel>
-                        <Input id='loginPassword' type='password' loginPassword={this.state.loginPassword}
-                         onChange={this.inputLoginPasswordChangeHandler} /> 
-                         <FormHelperText className={this.state.loginPasswordRequired}> <span className='red'>
-                            required </span>
-                        </FormHelperText>              
-                    </FormControl><br />
-                    {this.state.failedLogIn === true && 
-                     <FormControl>
-                      <span className='failure-text'>
-                            Incorrect username and/or password </span>
-                </FormControl> }
-                <br />
-                    <Button className={classes.loginBtn} variant='contained' color='primary' onClick={this.loginClickHandler}>LOGIN</Button>
-                    <br /> <br />
-                    </CardContent>
-                </Card>
-            </div>
+                            <FormControl required className={classes.formControl}>
+                                <InputLabel htmlFor='loginPassword'>Password</InputLabel>
+                                <Input id='loginPassword' type='password' loginPassword={this.state.loginPassword}
+                                    onChange={this.inputLoginPasswordChangeHandler} />
+                                <FormHelperText className={this.state.loginPasswordRequired}> <span className='red'>
+                                    required </span>
+                                </FormHelperText>
+                            </FormControl><br />
+                            {this.state.failedLogIn === true &&
+                                <FormControl>
+                                    <span className='failure-text'>
+                                        Incorrect username and/or password </span>
+                                </FormControl>}
+                            <br />
+                            <Button className={classes.loginBtn} variant='contained' color='primary' onClick={this.loginClickHandler}>LOGIN</Button>
+                            <br /> <br />
+                        </CardContent>
+                    </Card>
+                </div>
 
             </div>
         )
     }
 }
 
-                   
 
-export default withStyles(styles) (Login);
+
+export default withStyles(styles)(Login);
