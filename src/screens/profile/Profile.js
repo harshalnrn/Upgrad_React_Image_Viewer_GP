@@ -40,6 +40,7 @@ const newStyles = {
         maxHeight: '250'
     }
 }
+
 const styles = theme => ({
     avatar: {
       margin: 10,
@@ -184,7 +185,6 @@ class Profile extends Component {
         xhr.addEventListener("readystatechange", function(){
             if (this.readyState === 4)
             {
-                console.log(JSON.parse(this.responseText));
                 that.setState({profilepicture: JSON.parse(this.responseText).data.profile_picture});
                 that.setState({username: JSON.parse(this.responseText).data.username});
                 that.setState({media: JSON.parse(this.responseText).data.counts.media});
@@ -258,6 +258,7 @@ class Profile extends Component {
          this.setState({fullname: updatedname});
          this.setState({modalIsOpen: false});
     }
+}
 
     postModalOpenHandler = (postId) => {
         console.log(postId);
@@ -269,8 +270,7 @@ class Profile extends Component {
         })[0];
         
         this.setState({currentPost});
-        console.log(this.state.post.images.standard_resolution.url);  
-        console.log(this.state.post.tags)
+        console.log(this.state.post.images.standard_resolution.url);
         this.setState({likecount: this.state.post.likes.count})
     }
 
@@ -282,14 +282,12 @@ class Profile extends Component {
             this.setState({
                 likecount: this.state.likecount+1
             });
-            console.log(this.state.likecount);
         }
         else{
             this.setState({iconChange: false});
             this.setState({
                 likecount: this.state.likecount-1
             });
-            console.log(this.state.likecount);
         }
     }
 
