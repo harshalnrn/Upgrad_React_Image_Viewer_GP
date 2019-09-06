@@ -237,6 +237,22 @@ class Profile extends Component {
          this.setState({fullname: updatedname});
          this.setState({modalIsOpen: false});
     }
+
+    postModalOpenHandler = (postId) => {
+        console.log(postId);
+        this.setState({postmodalIsOpen: true});
+
+        let currentPost = this.state;
+        currentPost.post = this.state.posts.filter((pos) => {
+             return pos.id === postId                      
+        })[0];
+        
+        this.setState({currentPost});
+        console.log(this.state.post.images.standard_resolution.url);  
+        console.log(this.state.post.tags)
+        this.setState({likecount: this.state.post.likes.count})
+    }
+
     
 
 
