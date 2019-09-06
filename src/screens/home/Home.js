@@ -39,9 +39,9 @@ const styles = theme => ({
 
 
     card: {
-        borderWidth:'0.5px',
+        borderWidth:'1px',
         margin: '10px',
-        borderStyle:'groove',
+        borderStyle:'hidden',
         display: 'block',
         minWidth:'590px',
         height:'500px',
