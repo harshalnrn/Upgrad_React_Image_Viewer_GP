@@ -224,7 +224,24 @@ class Profile extends Component {
                 <MenuItem onClick={this.closeMenuHandler}>Logout</MenuItem>
             </Menu>
                 </header>
-                </div>
+
+        <div className="information-section-container">
+            <Avatar alt={this.state.username} src={this.state.profilepicture} className = {classes.bigAvatar} />
+            <Typography className={classes.infouserName}>
+            
+            <div className= "temp">
+            <span className="user-name">{this.state.username}</span> <br />
+            <span className="posts-text-information-section">Posts: {this.state.media}</span>
+            <span className="follows-text-information-section">Follows: {this.state.follows}</span>
+            <span className="followedby-text-information-section">Followed By: {this.state.followedby}</span>
+            </div>
+            <span className="fullname-text-information-section">{this.state.fullname}</span>
+            <Fab color="secondary" aria-label="edit" className={classes.fab} onClick= {this.openEditModalHandler} >
+            <EditIcon />
+            </Fab>
+            </Typography>        
+        </div>
+
         )
     }
 }
