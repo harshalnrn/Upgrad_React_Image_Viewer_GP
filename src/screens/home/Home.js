@@ -479,7 +479,7 @@ image.tags.map(tag =>(
  <Grid  container direction="row" alignItems="left" >
    
      
-<Input    variant="contained" placeholder="Add a Comment" style={{width:300,fontSize:'13px'}} onChange={this.onChangeComments} ></Input>
+<Input    variant="contained" placeholder="Add a Comment" style={{width:480,fontSize:'13px'}} onChange={this.onChangeComments} ></Input>
 <Button   variant="contained" color="primary" size="large" style={{fontSize:'10px',margin:'2px'}} onClick={() => this.commentsHandler(image.id)}>Add</Button>
 </Grid>
 
