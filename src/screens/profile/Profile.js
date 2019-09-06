@@ -222,6 +222,23 @@ class Profile extends Component {
         
     }
 
+    
+    editFullNameChangeHandler = event => {
+        this.setState({editname: event.target.value})
+    }
+
+    updateClickHandler = (updatedname) => {
+        if (this.state.editname === "" ) {
+         this.setState({editnameRequired: 'dispBlock'});
+    }
+    else {
+         this.setState({editnameRequired: 'dispNone'})
+
+         this.setState({fullname: updatedname});
+         this.setState({modalIsOpen: false});
+    }
+    
+
 
     render() {
         return (
